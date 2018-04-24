@@ -1,0 +1,16 @@
+{
+    "name": "Event Submission Bundle",
+    "description": "Frontend Event Submission Bundle for Contao 4",
+    "type": "symfony-bundle",
+    "authors": [
+        {
+            "name": "Fred Bliss",
+            "email": "fred@intelligentspark.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "IntelligentSpark\\EventSubmission\\": "src/"
+        }
+    }
+}
