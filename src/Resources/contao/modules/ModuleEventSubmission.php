@@ -2,7 +2,7 @@
 
 namespace IntelligentSpark\EventSubmission\Module;
 
-use Contao\Events;
+use Contao\Events as Contao_Events;
 
 /**
  * Class ModuleEventReader
@@ -13,7 +13,7 @@ use Contao\Events;
  * @package    Controller
  */
 
-class ModuleEventSubmission extends Events
+class ModuleEventSubmission extends Contao_Events
 {
 
 	/**
