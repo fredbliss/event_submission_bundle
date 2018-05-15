@@ -32,6 +32,6 @@
 /**
  * Front end modules
  */
-$GLOBALS['FE_MOD']['events']['eventsubmission']    = 'IntelligentSpark\EventSubmission\ModuleEventSubmission';
+$GLOBALS['FE_MOD']['events']['eventsubmission']    = 'IntelligentSpark\EventSubmission\Module\ModuleEventSubmission';
 
 ?>
