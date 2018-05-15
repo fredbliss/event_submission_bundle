@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+    <file datatype="php" original="src/Resources/contao/languages/en/tl_calendar_events.php" source-language="en">
+        <body>
+            <trans-unit id="tl_calendar_events.phone.0">
+                <source>Phone Number</source>
+            </trans-unit>
+            <trans-unit id="tl_calendar_events.phone.1">
+                <source>Please enter the phone number best to reach you at.</source>
+            </trans-unit>
+            <trans-unit id="tl_calendar_events.email.0">
+                <source>Email</source>
+            </trans-unit>
+            <trans-unit id="tl_calendar_events.email.1">
+                <source>Please provide an email address best to contact you at.</source>
+            </trans-unit>
+            <trans-unit id="tl_calendar_events.name.0">
+                <source>Contact Name</source>
+            </trans-unit>
+            <trans-unit id="tl_calendar_events.name.1">
+                <source>Please provide the name of the person to contact regarding this event.</source>
+            </trans-unit>
+            <trans-unit id="tl_calendar_events.url.0">
+                <source>Event Url</source>
+            </trans-unit>
+            <trans-unit id="tl_calendar_events.url.1">
+                <source>Event Url</source>
+            </trans-unit>
+            <trans-unit id="tl_calendar_events.event_url.0">
+                <source>Event Url</source>
+            </trans-unit>
+            <trans-unit id="tl_calendar_events.event_url.1">
+                <source>Event Url</source>
+            </trans-unit>
+            <trans-unit id="tl_calendar_events.event_url.0">
+                <source>Event Title</source>
+            </trans-unit>
+            <trans-unit id="tl_calendar_events.event_url.1">
+                <source>Event Title</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

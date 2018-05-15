@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+    <file datatype="php" original="src/Resources/contao/languages/en/modules.php" source-language="en">
+        <body>
+            <trans-unit id="FMD.eventsubmission.0">
+                <source>Event Submission</source>
+            </trans-unit>
+            <trans-unit id="FMD.eventsubmission.1">
+                <source>Allow people to submit events.</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

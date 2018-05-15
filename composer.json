@@ -1,16 +1,38 @@
 {
-    "name": "Event Submission Bundle",
+    "name": "intelligentspark/event_submission",
     "description": "Frontend Event Submission Bundle for Contao 4",
-    "type": "symfony-bundle",
+    "type": "contao-bundle",
     "authors": [
         {
             "name": "Fred Bliss",
             "email": "fred@intelligentspark.com"
         }
     ],
+    "require": {
+        "php": ">=7.0",
+        "contao/core-bundle": "^4.4"
+    },
+    "require-dev": {
+        "contao/manager-plugin": "^2.0"
+    },
+    "conflict": {
+        "contao/manager-plugin": "<2.0 || >=3.0"
+    },
     "autoload": {
         "psr-4": {
             "IntelligentSpark\\EventSubmission\\": "src/"
         }
+    },
+    "classmap": [
+        "src/Resources/contao/"
+    ],
+    "exclude-from-classmap": [
+        "src/Resources/contao/config/",
+        "src/Resources/contao/dca/",
+        "src/Resources/contao/languages/",
+        "src/Resources/contao/templates/"
+    ],
+    "extra": {
+        "contao-manager-plugin": "IntelligentSpark\\EventSubmission\\ContaoManager\\Plugin"
     }
 }
