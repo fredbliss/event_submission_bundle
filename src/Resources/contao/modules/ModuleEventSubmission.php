@@ -31,7 +31,7 @@ class ModuleEventSubmission extends Contao_Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### EVENT SUBMISSION ###';
 			$objTemplate->title = $this->headline;
@@ -85,7 +85,7 @@ class ModuleEventSubmission extends Contao_Events
 
         $this->tableless = true;
 
-        $this->loadLanguageFile('tl_calendar_events');
+        \System::loadLanguageFile('tl_calendar_events');
         $this->loadDataContainer('tl_calendar_events');
 
         $this->Template->fields = '';
@@ -113,6 +113,8 @@ class ModuleEventSubmission extends Contao_Events
 
             $strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
+            $strTable = 'tl_calendar_events';
+
             // Continue if the class is not defined
             if (!$this->classFileExists($strClass))
             {
@@ -132,22 +134,22 @@ class ModuleEventSubmission extends Contao_Events
                     break;
                 case 'startTime':
                     $arrData['eval']['class'] = 'time start';
-                    if($this->Input->post('FORM_SUBMIT') == 'tl_event_submission')
+                    if(\Input::post('FORM_SUBMIT') == 'tl_event_submission')
                         $arrData['eval']['rgxp'] = '';
                     break;
                 case 'endTime':
                     $arrData['eval']['class'] = 'time end';
-                    if($this->Input->post('FORM_SUBMIT') == 'tl_event_submission')
+                    if(\Input::post('FORM_SUBMIT') == 'tl_event_submission')
                         $arrData['eval']['rgxp'] = '';
                     break;
             }
 
-            $objWidget = new $strClass($this->prepareForWidget($arrData, $field, $arrData['default']));
+            $objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $arrData['default'], $field, $strTable, $this));
             $objWidget->storeValues = true;
             $objWidget->rowClass = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
 
             // Validate input
-            if ($this->Input->post('FORM_SUBMIT') == 'tl_event_submission')
+            if (\Input::post('FORM_SUBMIT') == 'tl_event_submission')
             {
                 $objWidget->validate();
                 $varValue = $objWidget->value;
@@ -159,7 +161,7 @@ class ModuleEventSubmission extends Contao_Events
                 {
                     try
                     {
-                        $objDate = new Date($varValue);
+                        $objDate = new \Date($varValue);
                         $varValue = $objDate->tstamp;
                     }
                     catch (Exception $e)
@@ -171,7 +173,7 @@ class ModuleEventSubmission extends Contao_Events
                 // Make sure that unique fields are unique (check the eval setting first -> #3063)
                 if ($arrData['eval']['unique'] && $varValue != '')
                 {
-                    $objUnique = $this->Database->prepare("SELECT * FROM tl_calendar_events WHERE " . $field . "=?")
+                    $objUnique = \Database::getInstance()->prepare("SELECT * FROM tl_calendar_events WHERE " . $field . "=?")
                         ->limit(1)
                         ->execute($varValue);
 
@@ -206,7 +208,7 @@ class ModuleEventSubmission extends Contao_Events
             ++$i;
         }
 
-        $this->Template->action = $this->Environment->request;
+        $this->Template->action = \Environment::get('indexFreeRequest');
         $this->Template->slabel = 'Submit';
         $this->Template->formId = 'tl_event_submission';
         $this->Template->rowLast = 'row_' . ++$i . ((($i % 2) == 0) ? ' even' : ' odd');
@@ -214,7 +216,7 @@ class ModuleEventSubmission extends Contao_Events
         $this->Template->hasError = $doNotSubmit;
 
         // Create new user if there are no errors
-        if ($this->Input->post('FORM_SUBMIT') == 'tl_event_submission' && !$doNotSubmit)
+        if (\Input::post('FORM_SUBMIT') == 'tl_event_submission' && !$doNotSubmit)
         {
             $this->createNewEvent($arrEvent);
 
@@ -225,7 +227,7 @@ class ModuleEventSubmission extends Contao_Events
 
     protected function createNewEvent($arrData)
     {
-        $arrCal = deserialize($this->cal_calendar,true);
+        $arrCal = \StringUtil::deserialize($this->cal_calendar,true);
 
         $arrData['tstamp'] = time();
         $arrData['pid'] = (integer)current($arrCal);
@@ -241,7 +243,7 @@ class ModuleEventSubmission extends Contao_Events
         $arrData['alias'] = standardize($this->restoreBasicEntities($arrData['title']));
 
         // Create Event
-        $objNewEvent = $this->Database->prepare("INSERT INTO tl_calendar_events %s")
+        $objNewEvent = \Database::getInstance()->prepare("INSERT INTO tl_calendar_events %s")
             ->set($arrData)
             ->execute();
 
@@ -261,11 +263,11 @@ class ModuleEventSubmission extends Contao_Events
     {
         $this->loadLanguageFile('tl_calendar_events');
 
-        $objEmail = new Email();
+        $objEmail = new \Email();
 
         $objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
         $objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-        $objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['adminSubject'], $this->Environment->host);
+        $objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['adminSubject'], \Environment::get('host'));
 
         $strData = "\n\n";
 
@@ -277,7 +279,7 @@ class ModuleEventSubmission extends Contao_Events
                 continue;
             }
 
-            $v = deserialize($v);
+            $v = \StringUtil::deserialize($v);
 
             if ((stripos($k,'date')!==false || stripos($k,'time')!==false) && strlen($v))
             {
@@ -285,12 +287,12 @@ class ModuleEventSubmission extends Contao_Events
             }
 
             if(array_key_exists($k,$GLOBALS['TL_LANG']['tl_calendar_events']))
-                $strData .= $GLOBALS['TL_LANG']['tl_calendar_events'][$k][0] . ': ' . (is_array($v) ? implode(', ', $v) : $v) . "\n";
+                $strData .= $GLOBALS['TL_LANG']['tl_calendar_events'][$k][0] . ': ' . (\is_array($v) ? implode(', ', $v) : $v) . "\n";
         }
 
         $strDataFinal = sprintf("A new event has been submitted to the website \n event id: %s \n %s", $intId, $strData . "\n") . "\n";
 
-        $objTemplate = new FrontendTemplate('email_eventsubmission_notify');
+        $objTemplate = new \FrontendTemplate('email_eventsubmission_notify');
 
         $objEmail->text = $objTemplate->parse();
         $objEmail->text = "\n".$strDataFinal;
