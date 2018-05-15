@@ -20,7 +20,7 @@ class ModuleEventSubmission extends Events
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_event_submission';
+	protected $strTemplate = 'mod_eventsubmission';
 
 
 	/**
@@ -290,7 +290,7 @@ class ModuleEventSubmission extends Events
 
         $strDataFinal = sprintf("A new event has been submitted to the website \n event id: %s \n %s", $intId, $strData . "\n") . "\n";
 
-        $objTemplate = new FrontendTemplate('email_event_submission_notify');
+        $objTemplate = new FrontendTemplate('email_eventsubmission_notify');
 
         $objEmail->text = $objTemplate->parse();
         $objEmail->text = "\n".$strDataFinal;
