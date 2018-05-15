@@ -58,8 +58,8 @@ class ModuleEventSubmission extends Contao_Events
         $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir . '/jquery-timepicker-master/jquery.timepicker.min.js|static';
         $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir . '/datepair/dist/datepair.min.js|static';
         $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir . '/datepair/dist/jquery.datepair.min.js|static';
-        $GLOBALS['TL_CSS'][] = $assetsDir . '/jquery-timepicker-master/jquery.timepicker.css|static';
-        $GLOBALS['TL_CSS'][] = $assetsDir . '/jquery-ui/jquery-ui.min.css|static';
+        $GLOBALS['TL_CSS'][] = $assetsDir . '/jquery-timepicker-master/jquery.timepicker.css||static';
+        $GLOBALS['TL_CSS'][] = $assetsDir . '/jquery-ui/jquery-ui.min.css||static';
 
         $GLOBALS['TL_MOOTOOLS'][] = "<script> jQuery(document).ready(function(){
                     (function($) {
