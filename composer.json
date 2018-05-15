@@ -1,5 +1,5 @@
 {
-    "name": "intelligentspark/event_submission",
+    "name": "intelligentspark/event_submission_bundle",
     "description": "Frontend Event Submission Bundle for Contao 4",
     "type": "contao-bundle",
     "authors": [
