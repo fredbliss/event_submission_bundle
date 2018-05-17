@@ -16,6 +16,7 @@ var path = {
     js: [
       'node_modules/jquery-ui/ui/widget.js'
       ,'node_modules/jquery-ui/ui/widgets/datepicker.js'
+      ,'node_modules/datepair.js/dist/datepair.js'
       ,'node_modules/datepair.js/dist/jquery.datepair.js'
       ,'node_modules/timepicker/jquery.timepicker.js'
       ,'node_modules/moment/moment.js'
