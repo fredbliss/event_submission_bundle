@@ -59,12 +59,12 @@ class ModuleEventSubmission extends Contao_Events
         $GLOBALS['TL_JQUERY'][] = "<script> jQuery(document).ready(function(){
                     (function($) {
 
-        $('#tl_event_submission .time').timepicker({
+        $('input.time').timepicker({
             'showDuration': true,
             'timeFormat': 'g:i a'
         });
 
-        $('#tl_event_submission .date').datepicker({
+        $('input.date').datepicker({
             'format': 'MM/DD/YYYY',
             'autoclose': true
         });
