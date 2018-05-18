@@ -54,7 +54,7 @@ class ModuleEventSubmission extends Contao_Events
         $assetsDir = 'web/bundles/eventsubmission';
 
         $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir . '/event-submission.min.js|static';
-        $GLOBALS['TL_CSS'][] = $assetsDir . '/event-submission.min.css||static';
+        $GLOBALS['TL_CSS'][] = $assetsDir . '/event-submission.min.css|static';
 
         $GLOBALS['TL_JQUERY'][] = "<script> jQuery(document).ready(function(){
                     (function($) {
