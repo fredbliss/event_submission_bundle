@@ -15,12 +15,14 @@ var path = {
   src: {
     js: [
       'node_modules/jquery-ui/ui/widget.js'
-      ,'node_modules/datepair.js/dist/jquery.datepair.js'
+      ,'node_modules/jquery-ui/ui/widgets/datepicker.js'
       ,'node_modules/timepicker/jquery.timepicker.js'
       ,'node_modules/moment/moment.js'
     ]
     ,css: [
-      ,'node-modules/jquery-ui/themes/base/datepicker.css'
+      ,'node_modules/jquery-ui/themes/base/core.css'
+      ,'node_modules/jquery-ui/themes/base/theme.css'
+      ,'node_modules/jquery-ui/themes/base/datepicker.css'
       ,'node_modules/timepicker/jquery.timepicker.css'
       ,'css/*.css'
     ]

@@ -54,24 +54,20 @@ class ModuleEventSubmission extends Contao_Events
         $assetsDir = 'web/bundles/eventsubmission';
 
         $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir . '/event-submission.min.js|static';
-        $GLOBALS['TL_CSS'][] = $assetsDir . '/event-submission.min.css||static';
+        $GLOBALS['TL_CSS'][] = $assetsDir . '/event-submission.min.css|static';
 
         $GLOBALS['TL_JQUERY'][] = "<script> jQuery(document).ready(function(){
                     (function($) {
 
-         $('#tl_event_submission .time').timepicker({
+        $('input.time').timepicker({
             'showDuration': true,
             'timeFormat': 'g:i a'
         });
 
-        $('#tl_event_submission .date').datepicker({
+        $('input.date').datepicker({
             'format': 'MM/DD/YYYY',
             'autoclose': true
         });
-
-        // initialize datepair
-
-        $('#tl_event_submission').datepair();
 
      })(jQuery);
     });
