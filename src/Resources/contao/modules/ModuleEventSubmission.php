@@ -69,10 +69,6 @@ class ModuleEventSubmission extends Contao_Events
             'autoclose': true
         });
 
-        // initialize datepair
-
-        $('#tl_event_submission').datepair();
-
      })(jQuery);
     });
     </script>
