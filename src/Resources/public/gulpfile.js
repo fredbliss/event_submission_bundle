@@ -20,8 +20,10 @@ var path = {
       ,'node_modules/moment/moment.js'
     ]
     ,css: [
-      ,'node_modules/timepicker/jquery.timepicker.css'
+      ,'node_modules/jquery-ui/themes/base/core.css'
+      ,'node_modules/jquery-ui/themes/base/theme.css'
       ,'node_modules/jquery-ui/themes/base/datepicker.css'
+      ,'node_modules/timepicker/jquery.timepicker.css'
       ,'css/*.css'
     ]
   }
