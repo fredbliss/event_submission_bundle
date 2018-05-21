@@ -38,7 +38,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['name'] = array(
     'sorting'                 => true,
     'flag'                    => 1,
     'inputType'               => 'text',
-    'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+    'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+    'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['email'] = array(
@@ -48,7 +49,8 @@ $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['email'] = array(
     'sorting'                 => true,
     'flag'                    => 1,
     'inputType'               => 'text',
-    'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+    'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+    'sql'                     => "varchar(255) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['phone'] = array(
@@ -58,5 +60,6 @@ $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['phone'] = array(
     'sorting'                 => true,
     'flag'                    => 1,
     'inputType'               => 'text',
-    'eval'                    => array('mandatory'=>true, 'maxlength'=>255)
+    'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
+    'sql'                     => "varchar(255) NOT NULL default ''"
 );
