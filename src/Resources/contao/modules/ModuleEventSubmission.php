@@ -107,7 +107,7 @@ class ModuleEventSubmission extends Contao_Events
             $strTable = 'tl_calendar_events';
 
             // Continue if the class is not defined
-            if (!$this->classFileExists($strClass))
+            if (!class_exists($strClass))
             {
                 continue;
             }
