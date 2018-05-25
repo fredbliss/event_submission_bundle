@@ -18,6 +18,7 @@ use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
 use IntelligentSpark\EventSubmission\EventSubmissionBundle;
+
 class Plugin implements BundlePluginInterface
 {
     /**
@@ -26,7 +27,8 @@ class Plugin implements BundlePluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create(EventSubmissionBundle::class)->setLoadAfter([ContaoCoreBundle::class,ContaoCalendarBundle::class]),
+            BundleConfig::create(EventSubmissionBundle::class)
+                ->setLoadAfter([ContaoCoreBundle::class,ContaoCalendarBundle::class]),
         ];
     }
 }
