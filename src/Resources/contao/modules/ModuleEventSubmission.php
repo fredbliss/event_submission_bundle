@@ -77,7 +77,7 @@ class ModuleEventSubmission extends Contao_Events
         $this->tableless = true;
 
         \System::loadLanguageFile('tl_calendar_events');
-        $this->loadDataContainer('tl_calendar_events');
+        \Controller::loadDataContainer('tl_calendar_events');
 
         $this->Template->fields = '';
         $this->Template->tableless = $this->tableless;
