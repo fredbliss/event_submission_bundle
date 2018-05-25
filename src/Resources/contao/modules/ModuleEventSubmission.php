@@ -85,8 +85,8 @@ class ModuleEventSubmission extends Events
 
         $this->tableless = true;
 
-        $this->loadLanguageFile('tl_calendar_events');
-        $this->loadDataContainer('tl_calendar_events');
+        \System::loadLanguageFile('tl_calendar_events');
+        \Controller::loadDataContainer('tl_calendar_events');
 
         $this->Template->fields = '';
         $this->Template->tableless = $this->tableless;
