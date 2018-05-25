@@ -21,11 +21,11 @@
     "autoload": {
         "psr-4": {
             "IntelligentSpark\\EventSubmission\\": "src/"
-        }
+        },
+        "classmap": [
+            "src/Resources/contao/"
+        ]
     },
-    "classmap": [
-        "src/Resources/contao/"
-    ],
     "extra": {
         "contao-manager-plugin": "IntelligentSpark\\EventSubmission\\ContaoManager\\Plugin"
     }
