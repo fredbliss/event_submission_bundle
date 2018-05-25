@@ -13,11 +13,14 @@
         "contao/core-bundle": "^4.4",
         "symfony/framework-bundle": "^3.4"
     },
+    "conflict": {
+      "contao/manager-plugin": "<2.0 || >=3.0"
+    },
     "require-dev": {
         "contao/manager-plugin": "^2.0"
     },
-    "conflict": {
-        "contao/manager-plugin": "<2.0 || >=3.0"
+    "extra": {
+      "contao-manager-plugin": "IntelligentSpark\\EventSubmission\\ContaoManager\\Plugin"
     },
     "autoload": {
         "psr-4": {
@@ -25,9 +28,12 @@
         },
         "classmap": [
             "src/Resources/contao/"
+        ],
+        "exclude-from-classmap": [
+          "src/Resources/contao/config/",
+          "src/Resources/contao/dca/",
+          "src/Resources/contao/languages/",
+          "src/Resources/contao/templates/"
         ]
-    },
-    "extra": {
-        "contao-manager-plugin": "IntelligentSpark\\EventSubmission\\ContaoManager\\Plugin"
     }
 }
