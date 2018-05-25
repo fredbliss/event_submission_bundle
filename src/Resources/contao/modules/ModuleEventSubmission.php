@@ -223,7 +223,8 @@ class ModuleEventSubmission extends Contao_Events
         $arrData['tstamp'] = time();
         $arrData['pid'] = (integer)current($arrCal);
         $arrData['author'] = 1; //Administrator
-        $arrData['details'] = '<p>'.$arrData['details'].'</p>'."\n\nlink: <a href=\"".$arrData['url']."\" title=\"".$arrData['title']."\" target=\"_blank\">Event Webpage</a>";
+
+        $strContentElement = '<p>'.$arrData['details'].'</p>'."\n\nlink: <a href=\"".$arrData['url']."\" title=\"".$arrData['title']."\" target=\"_blank\">Event Webpage</a>";
 
         if($arrData['startTime']) {
             $arrData['addTime'] = 1;
@@ -238,8 +239,18 @@ class ModuleEventSubmission extends Contao_Events
             ->set($arrData)
             ->execute();
 
-        #var_dump($objNewEvent);
         $insertId = $objNewEvent->insertId;
+
+        $arrContent['pid'] = $insertId;
+        $arrContent['tstamp'] = time();
+        $arrContent['sorting'] = 128;
+        $arrContent['ptable'] = 'tl_calendar_events';
+        $arrContent['type'] = 'text';
+        $arrContent['text'] = $strContentElement;
+
+        $objNewContentElement = \Database::getInstance()->prepare("INSERT INTO tl_content %s")
+            ->set($arrContent)
+            ->execute();
 
         // Inform admin if no activation link is sent
         $this->sendAdminNotification($insertId, $arrData);
