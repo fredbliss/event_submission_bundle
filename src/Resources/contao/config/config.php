@@ -1,4 +1,4 @@
-<?php if (!defined('TL_ROOT')) die('You cannot access this file directly!');
+<?php
 
 /**
  * Contao Open Source CMS
@@ -30,12 +30,8 @@
 
 
 /**
- * Fields
+ * Front end modules
  */
-$GLOBALS['TL_LANG']['tl_calendar_events']['phone']        = array('Phone Number', 'Please enter the phone number best to reach you at.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['email']        = array('Email', 'Please provide an email address best to contact you at.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['name']       = array('Contact Name', 'Please provide the name of the person to contact regarding this event.');
-$GLOBALS['TL_LANG']['tl_calendar_events']['url']      = array('Event Url','');
-$GLOBALS['TL_LANG']['tl_calendar_events']['event_url']      = array('Event Url','');
+$GLOBALS['FE_MOD']['events']['eventsubmission']    = 'IntelligentSpark\EventSubmission\Module\ModuleEventSubmission';
 
-$GLOBALS['TL_LANG']['tl_calendar_events']['title']      = array('Event Title','');
+?>

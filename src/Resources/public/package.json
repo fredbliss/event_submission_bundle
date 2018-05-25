@@ -1,0 +1,43 @@
+{
+  "name": "contao4-event-submission",
+  "version": "1.0.0",
+  "description": "A Contao 4 Event Submission Tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intelligentspark/event_submission_bundle.git"
+  },
+  "keywords": [
+    "Contao",
+    "4",
+    "Events",
+    "Submission"
+  ],
+  "author": "Intelligent Spark <fred@intelligentspark.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/intelligentspark/event_submission_bundle/issues"
+  },
+  "homepage": "https://github.com/intelligentspark/event_submission_bundle#readme",
+  "dependencies": {
+    "datepair.js": "^0.4.16",
+    "jquery-ui": "^1.12.1",
+    "moment": "^2.22.1",
+    "timepicker": "^1.11.12"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-rigger": "^0.5.8",
+    "gulp-concat": "^2.6.1",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-rename": "^1.2.3",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-strip-comments": "^2.5.2",
+    "gulp-uglify": "^3.0.0",
+    "gulp-wait": "0.0.2",
+    "rimraf": "^2.6.2"
+  }
+}

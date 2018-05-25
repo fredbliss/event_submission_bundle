@@ -2,7 +2,7 @@
 
 namespace IntelligentSpark\EventSubmission\Module;
 
-use Contao\Events;
+use Contao\Events as Contao_Events;
 
 /**
  * Class ModuleEventReader
@@ -13,14 +13,14 @@ use Contao\Events;
  * @package    Controller
  */
 
-class ModuleEventSubmission extends Events
+class ModuleEventSubmission extends Contao_Events
 {
 
 	/**
 	 * Template
 	 * @var string
 	 */
-	protected $strTemplate = 'mod_event_submission';
+	protected $strTemplate = 'mod_eventsubmission';
 
 
 	/**
@@ -31,7 +31,7 @@ class ModuleEventSubmission extends Events
 	{
 		if (TL_MODE == 'BE')
 		{
-			$objTemplate = new BackendTemplate('be_wildcard');
+			$objTemplate = new \BackendTemplate('be_wildcard');
 
 			$objTemplate->wildcard = '### EVENT SUBMISSION ###';
 			$objTemplate->title = $this->headline;
@@ -51,32 +51,23 @@ class ModuleEventSubmission extends Events
 	 */
 	protected function compile()
 	{
+        $assetsDir = 'web/bundles/eventsubmission';
 
-		global $objPage;
-        $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/event_submission/html/jquery-ui/jquery-ui.min.js';
-        $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/event_submission/html/moment.min.js';
-        $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/event_submission/html/jquery-timepicker-master/jquery.timepicker.min.js';
-        $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/event_submission/html/datepair/dist/datepair.min.js';
-        $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/event_submission/html/datepair/dist/jquery.datepair.min.js';
-        $GLOBALS['TL_CSS'][] = 'system/modules/event_submission/html/jquery-timepicker-master/jquery.timepicker.css';
-        $GLOBALS['TL_CSS'][] = 'system/modules/event_submission/html/jquery-ui/jquery-ui.min.css';
+        $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir . '/event-submission.min.js|static';
+        $GLOBALS['TL_CSS'][] = $assetsDir . '/event-submission.min.css|static';
 
-        $GLOBALS['TL_MOOTOOLS'][] = "<script> jQuery(document).ready(function(){
+        $GLOBALS['TL_JQUERY'][] = "<script> jQuery(document).ready(function(){
                     (function($) {
 
-         $('#tl_event_submission .time').timepicker({
+        $('input.time').timepicker({
             'showDuration': true,
             'timeFormat': 'g:i a'
         });
 
-        $('#tl_event_submission .date').datepicker({
+        $('input.date').datepicker({
             'format': 'MM/DD/YYYY',
             'autoclose': true
         });
-
-        // initialize datepair
-
-        $('#tl_event_submission').datepair();
 
      })(jQuery);
     });
@@ -86,7 +77,7 @@ class ModuleEventSubmission extends Events
         $this->tableless = true;
 
         \System::loadLanguageFile('tl_calendar_events');
-        \Controller::loadDataContainer('tl_calendar_events');
+        $this->loadDataContainer('tl_calendar_events');
 
         $this->Template->fields = '';
         $this->Template->tableless = $this->tableless;
@@ -113,8 +104,10 @@ class ModuleEventSubmission extends Events
 
             $strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
+            $strTable = 'tl_calendar_events';
+
             // Continue if the class is not defined
-            if (!$this->classFileExists($strClass))
+            if (!class_exists($strClass))
             {
                 continue;
             }
@@ -132,22 +125,22 @@ class ModuleEventSubmission extends Events
                     break;
                 case 'startTime':
                     $arrData['eval']['class'] = 'time start';
-                    if($this->Input->post('FORM_SUBMIT') == 'tl_event_submission')
+                    if(\Input::post('FORM_SUBMIT') == 'tl_event_submission')
                         $arrData['eval']['rgxp'] = '';
                     break;
                 case 'endTime':
                     $arrData['eval']['class'] = 'time end';
-                    if($this->Input->post('FORM_SUBMIT') == 'tl_event_submission')
+                    if(\Input::post('FORM_SUBMIT') == 'tl_event_submission')
                         $arrData['eval']['rgxp'] = '';
                     break;
             }
 
-            $objWidget = new $strClass($this->prepareForWidget($arrData, $field, $arrData['default']));
+            $objWidget = new $strClass($strClass::getAttributesFromDca($arrData, $field, $arrData['default'], $field, $strTable, $this));
             $objWidget->storeValues = true;
             $objWidget->rowClass = 'row_' . $i . (($i == 0) ? ' row_first' : '') . ((($i % 2) == 0) ? ' even' : ' odd');
 
             // Validate input
-            if ($this->Input->post('FORM_SUBMIT') == 'tl_event_submission')
+            if (\Input::post('FORM_SUBMIT') == 'tl_event_submission')
             {
                 $objWidget->validate();
                 $varValue = $objWidget->value;
@@ -159,7 +152,7 @@ class ModuleEventSubmission extends Events
                 {
                     try
                     {
-                        $objDate = new Date($varValue);
+                        $objDate = new \Date($varValue);
                         $varValue = $objDate->tstamp;
                     }
                     catch (Exception $e)
@@ -171,7 +164,7 @@ class ModuleEventSubmission extends Events
                 // Make sure that unique fields are unique (check the eval setting first -> #3063)
                 if ($arrData['eval']['unique'] && $varValue != '')
                 {
-                    $objUnique = $this->Database->prepare("SELECT * FROM tl_calendar_events WHERE " . $field . "=?")
+                    $objUnique = \Database::getInstance()->prepare("SELECT * FROM tl_calendar_events WHERE " . $field . "=?")
                         ->limit(1)
                         ->execute($varValue);
 
@@ -206,7 +199,7 @@ class ModuleEventSubmission extends Events
             ++$i;
         }
 
-        $this->Template->action = $this->Environment->request;
+        $this->Template->action = \Environment::get('indexFreeRequest');
         $this->Template->slabel = 'Submit';
         $this->Template->formId = 'tl_event_submission';
         $this->Template->rowLast = 'row_' . ++$i . ((($i % 2) == 0) ? ' even' : ' odd');
@@ -214,7 +207,7 @@ class ModuleEventSubmission extends Events
         $this->Template->hasError = $doNotSubmit;
 
         // Create new user if there are no errors
-        if ($this->Input->post('FORM_SUBMIT') == 'tl_event_submission' && !$doNotSubmit)
+        if (\Input::post('FORM_SUBMIT') == 'tl_event_submission' && !$doNotSubmit)
         {
             $this->createNewEvent($arrEvent);
 
@@ -225,7 +218,7 @@ class ModuleEventSubmission extends Events
 
     protected function createNewEvent($arrData)
     {
-        $arrCal = deserialize($this->cal_calendar,true);
+        $arrCal = \StringUtil::deserialize($this->cal_calendar,true);
 
         $arrData['tstamp'] = time();
         $arrData['pid'] = (integer)current($arrCal);
@@ -241,7 +234,7 @@ class ModuleEventSubmission extends Events
         $arrData['alias'] = standardize($this->restoreBasicEntities($arrData['title']));
 
         // Create Event
-        $objNewEvent = $this->Database->prepare("INSERT INTO tl_calendar_events %s")
+        $objNewEvent = \Database::getInstance()->prepare("INSERT INTO tl_calendar_events %s")
             ->set($arrData)
             ->execute();
 
@@ -261,11 +254,11 @@ class ModuleEventSubmission extends Events
     {
         $this->loadLanguageFile('tl_calendar_events');
 
-        $objEmail = new Email();
+        $objEmail = new \Email();
 
         $objEmail->from = $GLOBALS['TL_ADMIN_EMAIL'];
         $objEmail->fromName = $GLOBALS['TL_ADMIN_NAME'];
-        $objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['adminSubject'], $this->Environment->host);
+        $objEmail->subject = sprintf($GLOBALS['TL_LANG']['MSC']['adminSubject'], \Environment::get('host'));
 
         $strData = "\n\n";
 
@@ -277,7 +270,7 @@ class ModuleEventSubmission extends Events
                 continue;
             }
 
-            $v = deserialize($v);
+            $v = \StringUtil::deserialize($v);
 
             if ((stripos($k,'date')!==false || stripos($k,'time')!==false) && strlen($v))
             {
@@ -285,12 +278,12 @@ class ModuleEventSubmission extends Events
             }
 
             if(array_key_exists($k,$GLOBALS['TL_LANG']['tl_calendar_events']))
-                $strData .= $GLOBALS['TL_LANG']['tl_calendar_events'][$k][0] . ': ' . (is_array($v) ? implode(', ', $v) : $v) . "\n";
+                $strData .= $GLOBALS['TL_LANG']['tl_calendar_events'][$k][0] . ': ' . (\is_array($v) ? implode(', ', $v) : $v) . "\n";
         }
 
         $strDataFinal = sprintf("A new event has been submitted to the website \n event id: %s \n %s", $intId, $strData . "\n") . "\n";
 
-        $objTemplate = new FrontendTemplate('email_event_submission_notify');
+        $objTemplate = new \FrontendTemplate('email_eventsubmission_notify');
 
         $objEmail->text = $objTemplate->parse();
         $objEmail->text = "\n".$strDataFinal;
