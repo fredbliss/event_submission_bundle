@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace IntelligentSpark\EventSubmission;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-final class EventSubmissionBundle extends Bundle
+class EventSubmissionBundle extends Bundle
 {
 
 }

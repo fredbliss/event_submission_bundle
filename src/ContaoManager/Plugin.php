@@ -1,5 +1,7 @@
 <?php
+
 declare(strict_types=1);
+
 /*
  * rootcontent extension for Contao Open Source CMS
  *
