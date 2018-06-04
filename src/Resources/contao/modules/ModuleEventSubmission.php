@@ -286,7 +286,11 @@ class ModuleEventSubmission extends Contao_Events
 
             if ((stripos($k,'date')!==false || stripos($k,'time')!==false) && strlen($v))
             {
-                $v = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+                if(stripos($k,'date')!==false) {
+                    $v = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+                }else{
+                    $v = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $v);
+                }
             }
 
             if(array_key_exists($k,$GLOBALS['TL_LANG']['tl_calendar_events']))
