@@ -32,12 +32,6 @@
             <trans-unit id="tl_calendar_events.event_url.1">
                 <source>Event Url</source>
             </trans-unit>
-            <trans-unit id="tl_calendar_events.event_url.0">
-                <source>Event Title</source>
-            </trans-unit>
-            <trans-unit id="tl_calendar_events.event_url.1">
-                <source>Event Title</source>
-            </trans-unit>
         </body>
     </file>
 </xliff>

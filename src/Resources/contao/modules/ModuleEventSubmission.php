@@ -247,6 +247,7 @@ class ModuleEventSubmission extends Contao_Events
         $arrContent['ptable'] = 'tl_calendar_events';
         $arrContent['type'] = 'text';
         $arrContent['text'] = $strContentElement;
+        $arrContent['teaser'] = $strContentElement;
 
         $objNewContentElement = \Database::getInstance()->prepare("INSERT INTO tl_content %s")
             ->set($arrContent)
