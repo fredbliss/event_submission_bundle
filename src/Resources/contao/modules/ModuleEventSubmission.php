@@ -287,9 +287,9 @@ class ModuleEventSubmission extends Contao_Events
             if ((stripos($k,'date')!==false || stripos($k,'time')!==false) && strlen($v))
             {
                 if(stripos($k,'date')!==false) {
-                    $v = $this->parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $v);
+                    $v = \System::parseDate($GLOBALS['TL_CONFIG']['dateFormat'], $v);
                 }else{
-                    $v = $this->parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $v);
+                    $v = \System::parseDate($GLOBALS['TL_CONFIG']['timeFormat'], $v);
                 }
             }
 
