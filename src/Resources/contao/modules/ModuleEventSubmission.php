@@ -61,11 +61,11 @@ class ModuleEventSubmission extends Contao_Events
 
         $('input.time').timepicker({
             'showDuration': true,
-            'timeFormat': 'g:i a'
+            'timeFormat': '".$GLOBALS['TL_CONFIG']['timeFormat']."'
         });
 
         $('input.date').datepicker({
-            'format': 'MM/DD/YYYY',
+            'format': '".$GLOBALS['TL_CONFIG']['dateFormat']."',
             'autoclose': true
         });
 
