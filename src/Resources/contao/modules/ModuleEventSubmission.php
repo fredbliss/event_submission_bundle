@@ -56,6 +56,8 @@ class ModuleEventSubmission extends Contao_Events
         $GLOBALS['TL_JAVASCRIPT'][] = $assetsDir . '/event-submission.min.js|static';
         $GLOBALS['TL_CSS'][] = $assetsDir . '/event-submission.min.css|static';
 
+        $strDateFormat = (strpos($GLOBALS['TL_CONFIG']['dateFormat'], 'Y')!==false ? str_replace('Y', 'YYYY', $GLOBALS['TL_CONFIG']['dateFormat']) : $GLOBALS['TL_CONFIG']['dateFormat']);
+
         $GLOBALS['TL_JQUERY'][] = "<script> jQuery(document).ready(function(){
                     (function($) {
 
@@ -65,7 +67,7 @@ class ModuleEventSubmission extends Contao_Events
         });
 
         $('input.date').datepicker({
-            'dateFormat': '".$GLOBALS['TL_CONFIG']['dateFormat']."',
+            'dateFormat': '".$strDateFormat."',
             'autoclose': true
         });
 
