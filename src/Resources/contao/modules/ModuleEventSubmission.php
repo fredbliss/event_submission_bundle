@@ -65,7 +65,7 @@ class ModuleEventSubmission extends Contao_Events
         });
 
         $('input.date').datepicker({
-            'format': '".$GLOBALS['TL_CONFIG']['dateFormat']."',
+            'dateFormat': '".$GLOBALS['TL_CONFIG']['dateFormat']."',
             'autoclose': true
         });
 
