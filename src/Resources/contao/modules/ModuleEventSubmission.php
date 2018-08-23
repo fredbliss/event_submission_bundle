@@ -306,7 +306,7 @@ class ModuleEventSubmission extends Contao_Events
         $objEmail->text = $objTemplate->parse();
         $objEmail->text = "\n".$strDataFinal;
         $objEmail->sendBcc('web@brightcloudstudio.com');
-		$objEmail->sendCc('info@westfieldbiz.org');
+		$objEmail->sendCc('dlombardi@westfieldbiz.org');
         $objEmail->sendTo($GLOBALS['TL_ADMIN_EMAIL']);//$GLOBALS['TL_ADMIN_EMAIL']);
 
         $this->log('A new event (ID ' . $intId . ') has been submitted on the website', 'ModuleEventSubmission sendAdminNotification()', TL_ACCESS);
