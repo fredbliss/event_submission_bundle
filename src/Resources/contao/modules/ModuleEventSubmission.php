@@ -233,6 +233,7 @@ class ModuleEventSubmission extends Contao_Events
             $arrData['startTime'] = strtotime($arrData['startTime']);
             $arrData['endTime'] = strtotime($arrData['endTime']);
             $arrData['teaser'] = $strContentElement;
+            $arrData['source'] = 'default';
         }
 
         $arrData['alias'] = standardize($this->restoreBasicEntities($arrData['title']));
