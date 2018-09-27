@@ -242,7 +242,7 @@ class ModuleEventSubmission extends Contao_Events
             ->execute();
 
         if($objDuplicateAliases->numRows>0)
-            $arrData['alias'] .= (string)$objDuplicateAliases->numRows + 1;     // increment the alias based on row count
+            $arrData['alias'] .= '-'.(string)$objDuplicateAliases->numRows + 1;     // increment the alias based on row count
 
         // Create Event
         $objNewEvent = \Database::getInstance()->prepare("INSERT INTO tl_calendar_events %s")
