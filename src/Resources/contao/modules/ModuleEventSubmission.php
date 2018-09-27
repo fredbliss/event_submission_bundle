@@ -238,12 +238,12 @@ class ModuleEventSubmission extends Contao_Events
 
         $arrData['alias'] = standardize($this->restoreBasicEntities($arrData['title']));
 
-        $objDuplicateAliases = \Database::getInstance()->prepare("SELECT alias FROM tl_calendar_events WHERE alias=%s")
+        $objDuplicateAliases = \Database::getInstance()->prepare("SELECT alias FROM tl_calendar_events WHERE alias=?")
             ->set($arrData['alias'])
             ->execute();
 
         if($objDuplicateAliases->numRows>0)
-            $arrData['alias'] .= $objDuplicateAliases->numRows + 1;     // increment the alias based on row count
+            $arrData['alias'] .= (string)$objDuplicateAliases->numRows + 1;     // increment the alias based on row count
 
         // Create Event
         $objNewEvent = \Database::getInstance()->prepare("INSERT INTO tl_calendar_events %s")
