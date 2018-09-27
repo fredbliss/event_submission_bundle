@@ -238,8 +238,7 @@ class ModuleEventSubmission extends Contao_Events
 
         $arrData['alias'] = standardize($this->restoreBasicEntities($arrData['title']));
 
-        $objDuplicateAliases = \Database::getInstance()->prepare("SELECT alias FROM tl_calendar_events WHERE alias=?")
-            ->set($arrData['alias'])
+        $objDuplicateAliases = \Database::getInstance()->prepare("SELECT alias FROM tl_calendar_events WHERE alias='".$arrData['alias']."'")
             ->execute();
 
         if($objDuplicateAliases->numRows>0)
