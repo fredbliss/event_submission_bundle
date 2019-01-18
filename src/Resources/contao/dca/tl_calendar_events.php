@@ -48,9 +48,9 @@ $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['details'] = array(
     'search'                  => true,
     'sorting'                 => true,
     'flag'                    => 1,
-    'inputType'               => 'text',
-    'eval'                    => array('mandatory'=>true, 'maxlength'=>255),
-    'sql'                     => array('type' => 'blob', 'default' => NULL)
+    'inputType'               => 'textarea',
+    'eval'                    => array('mandatory'=>true),
+    'sql'                     => "text NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['email'] = array(
