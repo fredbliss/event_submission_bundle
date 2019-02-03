@@ -104,6 +104,10 @@ class ModuleEventSubmission extends Contao_Events
                 $arrData['eval']['mandatory'] = false;
             }
 
+            if($field=='description') {
+                $arrData['eval']['maxlength'] = 2500;
+            }
+
             $strClass = $GLOBALS['TL_FFL'][$arrData['inputType']];
 
             $strTable = 'tl_calendar_events';
