@@ -50,7 +50,7 @@ $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['details'] = array(
     'flag'                    => 1,
     'inputType'               => 'textarea',
     'eval'                    => array('mandatory'=>true, 'maxlength'=>2500),
-    'sql'                     => "text NULL"
+    'sql'                     => "longblob"
 );
 
 $GLOBALS['TL_DCA']['tl_calendar_events']['fields']['email'] = array(
